@@ -1302,6 +1302,34 @@ def change_mat(self: mywindow):
     recalc_weight(self)
 
 
+def undo_red_tree(self: mywindow) -> None:
+    if len(self.red_tree_deque) >= 2:
+        self.red_tree_deque.pop()
+        if self.red_tree_deque:
+            self.blockSignals(True)
+            pre_last_change, vertical, horizontal = self.red_tree_deque[-1]
+            CQT.fill_wtabl(pre_last_change, self.ui.tbl_red_tree, self.edit_cr_mk, 200, height_row=24, auto_type=False)
+            if vertical and horizontal:
+                self.ui.tbl_red_tree.setVerticalScrollBar(QtWidgets.QScrollBar(vertical))
+                self.ui.tbl_red_tree.setHorizontalScrollBar(QtWidgets.QScrollBar(horizontal))
+            self.blockSignals(False)
+            accumulate_tree_mass(self)
+            fill_tab_to_level(self.ui.tbl_red_tree)
+            recalc_weight(self)
+
+
+def enter_red_tree(self: mywindow, row: int, col: int) -> None:
+    # change = self.ui.tbl_red_tree.item(row, col).text()
+    self.ui.tbl_red_tree.blockSignals(True)
+    vertical = self.ui.tbl_red_tree.horizontalScrollBar().value()
+    horizontal = self.ui.tbl_red_tree.verticalScrollBar().value()
+    change = CQT.list_from_wtabl_c(self.ui.tbl_red_tree, "", True, rez_dict=True)
+    last_changes = self.red_tree_deque[-4:]
+    last_changes.append((change, vertical, horizontal))
+    self.red_tree_deque = last_changes
+    self.ui.tbl_red_tree.blockSignals(False)
+
+
 @CQT.onerror
 def load_mats(self: mywindow):
     CQT.fill_wtabl(self.Data_mes.list_nomenklat, self.ui.tbl_anal_mat, set_editeble_col_nomera={})
@@ -1358,8 +1386,6 @@ def prepare_tbl_red_stukt(self: mywindow):
     # self.edit_cr_mk = {2, 5, 8, 14,15, 19, 20}
     self.edit_cr_mk = {3, 6, 9, 10, 15, 16, 20, 21}
     self.calculation = CalculationAnalog(self)
-    delegator = CQT.RollBackUserChangesDelegator(tabl_cr_stukt, self)
-    tabl_cr_stukt.setItemDelegate(delegator)
     # recalc_weight(self)
 
 

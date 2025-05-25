@@ -148,7 +148,7 @@ class Data_mes:
 
 """
 
-    DEBUG = True
+    DEBUG = False
     postfix = ''
     if DEBUG:
         postfix = " LIMIT 50"

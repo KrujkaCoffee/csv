@@ -18,7 +18,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/_project_cust_38" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -272,6 +272,7 @@
       <workItem from="1747212907860" duration="191000" />
       <workItem from="1747301268171" duration="1162000" />
       <workItem from="1747657421362" duration="390000" />
+      <workItem from="1748157575388" duration="314000" />
     </task>
     <servers />
   </component>
@@ -345,16 +346,6 @@
           <url>file://$PROJECT_DIR$/Reiting.py</url>
           <line>656</line>
           <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/te.py</url>
-          <line>41</line>
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/te.py</url>
-          <line>63</line>
-          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -97,7 +97,7 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.tbl_red_tree.cellChanged[int,int].connect(lambda: ANAL.recalc_weight(self))
         self.ui.tbl_red_tree.itemSelectionChanged.connect(lambda *_: self.calculation.item_selection())
         self.ui.tbl_red_tree.horizontalHeader().sectionResized.connect(lambda i,j,k: CMS.on_section_resized(self,i,j,k))
-        # self.ui.tbl_red_tree.cellChanged[int, int].connect(lambda row, col: ANAL.enter_red_tree(self, row, col))
+        self.ui.tbl_red_tree.cellChanged[int, int].connect(lambda row, col: ANAL.enter_red_tree(self, row, col))
         self.ui.tbl_red_tree.cellChanged[int, int].connect(lambda row, col: ANAL.accumulate_tree_mass(self, row=row, col=col))
         self.ui.tbl_red_tree.cellChanged[int, int].connect(lambda row, col: ANAL.fill_tab_to_level(self.ui.tbl_red_tree))
         #========lineedit
@@ -240,13 +240,14 @@ class mywindow(QtWidgets.QMainWindow):
 
     @CQT.onerror
     def keyReleaseEvent(self, e):
-
         if e.key() == 67 and e.modifiers() == (QtCore.Qt.ControlModifier | QtCore.Qt.ShiftModifier):
             if CQT.focus_is_QTableWidget():
                 CQT.copy_bufer_table(QtWidgets.QApplication.focusWidget())
         if self.ui.tbl_anal_dse_filtr.hasFocus():
             if e.key() == 16777220 or e.key() == 16777221:
                 CMS.apply_filtr_c(self, self.ui.tbl_anal_dse_filtr, self.ui.tbl_anal_dse)
+        if e.key() == 90 and e.modifiers() == QtCore.Qt.ControlModifier:
+            ANAL.undo_red_tree(self)
         if self.ui.tbl_anal_mat_filtr.hasFocus():
             if e.key() == 16777220 or e.key() == 16777221:
                 CMS.apply_filtr_c(self, self.ui.tbl_anal_mat_filtr, self.ui.tbl_anal_mat)
